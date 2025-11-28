@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Protocolo TAF | Ricardo Freire</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#EF4444">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
     <section id="screen-login" class="screen active">
         <div class="login-container">
             <div class="logo-area">
-                <img src="logo.png" alt="Logo Mindbox" class="logo-img" onerror="this.style.display='none'"> 
+                <img src="logo.png" alt="Logo Mindbox" class="logo-img" onerror="this.style.display='none'">
                 <h1>PROTOCOLO <span class="text-highlight">TAF</span></h1>
                 <p class="subtitle">DO ZERO À APROVAÇÃO</p>
             </div>
             
             <div class="input-group">
-                <label>E-MAIL DE ALUNO</label>
+                <label>E-MAIL</label>
                 <input type="email" id="login-email" placeholder="seu@email.com">
             </div>
             <div class="input-group">
@@ -31,8 +37,7 @@
             <button class="btn-primary" onclick="app.login()">
                 <i class="fa-solid fa-right-to-bracket"></i> ENTRAR
             </button>
-            
-            <p class="support-link">Primeiro acesso? Use a senha enviada no e-mail.</p>
+            <p class="support-link">Problemas no acesso? <a href="#">Suporte</a></p>
         </div>
     </section>
 
@@ -44,24 +49,19 @@
         
         <form id="onboarding-form" onsubmit="event.preventDefault(); app.processOnboarding();">
             <div class="input-group">
-                <label><i class="fa-solid fa-stopwatch"></i> CORRIDA 1KM (EM MINUTOS)</label>
-                <input type="number" id="test-run" placeholder="Ex: 6.0 (6 minutos)" step="0.1" required>
-                <span class="hint">Coloque o tempo total.</span>
+                <label><i class="fa-solid fa-stopwatch"></i> CORRIDA 1KM (MINUTOS)</label>
+                <input type="number" id="test-run" placeholder="Ex: 6.0" step="0.1" required>
             </div>
-
             <div class="input-group">
-                <label><i class="fa-solid fa-hand-fist"></i> FLEXÕES (MÁXIMO EM 1 MIN)</label>
-                <input type="number" id="test-pushups" placeholder="Ex: 20 repetições" required>
+                <label><i class="fa-solid fa-hand-fist"></i> FLEXÕES (MÁX EM 1 MIN)</label>
+                <input type="number" id="test-pushups" placeholder="Ex: 20" required>
             </div>
-
             <div class="input-group">
-                <label><i class="fa-solid fa-person-biking"></i> ABDOMINAIS (MÁXIMO EM 1 MIN)</label>
-                <input type="number" id="test-abs" placeholder="Ex: 30 repetições" required>
+                <label><i class="fa-solid fa-person-biking"></i> ABDOMINAIS (MÁX EM 1 MIN)</label>
+                <input type="number" id="test-abs" placeholder="Ex: 30" required>
             </div>
             
-            <button type="submit" class="btn-primary">
-                GERAR PLANO DE MISSÃO <i class="fa-solid fa-arrow-right"></i>
-            </button>
+            <button type="submit" class="btn-primary">GERAR MISSÃO <i class="fa-solid fa-arrow-right"></i></button>
         </form>
     </section>
 
@@ -95,7 +95,7 @@
                 <div class="mission-action"><i class="fa-solid fa-chevron-right"></i></div>
             </div>
 
-            <<h4 class="section-title">CENTRAL DE COMANDO</h4>
+            <h4 class="section-title">FERRAMENTAS</h4>
             <div class="tools-grid">
                 <div class="tool-card" onclick="app.openModal('modal-nutrition')">
                     <i class="fa-solid fa-utensils"></i><span>NUTRIÇÃO</span>
@@ -109,14 +109,13 @@
                 <div class="tool-card" onclick="app.resetDay()">
                     <i class="fa-solid fa-rotate-left"></i><span>RESET</span>
                 </div>
-
                 <div class="tool-card" onclick="app.exportData()">
-                    <i class="fa-solid fa-download"></i><span>SALVAR</span>
+                    <i class="fa-solid fa-download"></i><span>BACKUP</span>
                 </div>
                 <div class="tool-card" onclick="app.importData()">
-                    <i class="fa-solid fa-upload"></i><span>LER SAVE</span>
+                    <i class="fa-solid fa-upload"></i><span>RECUPERAR</span>
                 </div>
-                </div>
+            </div>
 
             <div class="motivation-banner">
                 <p id="daily-quote">"Disciplina é liberdade."</p>
@@ -135,9 +134,8 @@
                 <ul id="warmup-list" class="exercise-list"></ul>
             </div>
             <div class="workout-section main-set">
-                <h4><i class="fa-solid fa-dumbbell"></i> PRINCIPAL (Toque para ver técnica)</h4>
-                <div id="main-list-container">
-                    </div>
+                <h4><i class="fa-solid fa-dumbbell"></i> PRINCIPAL</h4>
+                <div id="main-list-container"></div>
             </div>
             <button class="btn-success" onclick="app.completeMission()">MISSÃO CUMPRIDA</button>
         </div>
@@ -150,15 +148,12 @@
         </div>
         <div class="modal-content">
             <div class="info-card">
-                <h4>RESPIRAÇÃO 4-7-8 (Ansiedade)</h4>
-                <p>1. Inspire pelo nariz por <strong>4s</strong>.</p>
-                <p>2. Segure o ar por <strong>7s</strong>.</p>
-                <p>3. Solte pela boca por <strong>8s</strong>.</p>
-                <p><em>Repita 3 a 5 vezes antes do treino.</em></p>
+                <h4>RESPIRAÇÃO 4-7-8</h4>
+                <p>Inspire 4s | Segure 7s | Solte 8s (Repita 3x)</p>
             </div>
             <div class="info-card">
-                <h4>VISUALIZAÇÃO (3 min)</h4>
-                <p>Feche os olhos. Imagine-se executando a barra e a corrida com perfeição. Sinta o ambiente e a sua aprovação.</p>
+                <h4>VISUALIZAÇÃO</h4>
+                <p>Imagine a execução perfeita do exercício por 3 minutos.</p>
             </div>
         </div>
     </div>
@@ -166,23 +161,13 @@
     <div id="modal-calculator" class="modal">
         <div class="modal-header">
             <button class="back-btn" onclick="app.closeModal('modal-calculator')"><i class="fa-solid fa-arrow-left"></i></button>
-            <h3>SIMULADOR DE NOTA</h3>
+            <h3>SIMULADOR TAF</h3>
         </div>
         <div class="modal-content">
-            <div class="input-group">
-                <label>FLEXÕES</label>
-                <input type="number" id="calc-flex" placeholder="Qtd">
-            </div>
-            <div class="input-group">
-                <label>ABDOMINAIS</label>
-                <input type="number" id="calc-abs" placeholder="Qtd">
-            </div>
-             <div class="input-group">
-                <label>CORRIDA (2400m)</label>
-                <input type="number" id="calc-run" placeholder="Minutos (ex: 12.0)">
-            </div>
-            <button class="btn-primary" onclick="app.calculateScore()">CALCULAR RESULTADO</button>
-            
+            <div class="input-group"><label>FLEXÕES</label><input type="number" id="calc-flex"></div>
+            <div class="input-group"><label>ABDOMINAIS</label><input type="number" id="calc-abs"></div>
+            <div class="input-group"><label>CORRIDA (MIN)</label><input type="number" id="calc-run"></div>
+            <button class="btn-primary" onclick="app.calculateScore()">CALCULAR</button>
             <div id="calc-result" class="result-box" style="display:none; margin-top:20px; text-align:center;">
                 <h2 id="score-text">--</h2>
                 <p id="score-status">--</p>
@@ -193,18 +178,11 @@
     <div id="modal-nutrition" class="modal">
          <div class="modal-header">
             <button class="back-btn" onclick="app.closeModal('modal-nutrition')"><i class="fa-solid fa-arrow-left"></i></button>
-            <h3>NUTRIÇÃO ESTRATÉGICA</h3>
+            <h3>NUTRIÇÃO</h3>
         </div>
         <div class="modal-content">
-             <div class="info-card">
-                <h4>PRÉ-TREINO</h4>
-                <p>🍌 1 Banana + 1 Colher Pasta de Amendoim</p>
-             </div>
-             <div class="info-card">
-                <h4>PÓS-TREINO</h4>
-                <p>🍗 Proteína + Carboidrato (Jantar/Almoço)</p>
-             </div>
-             <p class="hint">Consulte o PDF para a dieta completa do mês.</p>
+             <div class="info-card"><h4>PRÉ-TREINO</h4><p>🍌 Banana + Pasta de Amendoim</p></div>
+             <div class="info-card"><h4>PÓS-TREINO</h4><p>🍗 Proteína + Carbo</p></div>
         </div>
     </div>
 
