@@ -306,3 +306,15 @@ details.exercise-detail p.technique-desc {
     border-left: 4px solid var(--secondary);
 }
 .info-card h4 { margin-bottom: 10px; color: var(--secondary); font-family: var(--font-heading); }
+
+/* ÍCONE DE LOGIN (No lugar da imagem) */
+.logo-icon {
+    font-size: 60px;
+    color: var(--primary);
+    margin-bottom: 20px;
+    display: inline-block;
+    padding: 20px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 128, 255, 0.3);
+}
