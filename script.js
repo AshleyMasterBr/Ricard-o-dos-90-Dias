@@ -80,7 +80,7 @@ const app = {
     data: { nivel: null, dia: 1, nome: 'Guerreiro' },
 
     // MANTENHA O SEU LINK AQUI:
-    apiUrl: 'https://script.google.com/macros/s/AKfycbwxlJH7xcKbml9PP_2NVmfBUtAUqBstBQCQ0bBql-8DMlYZZW8cZ0uNx6EyPbdb98Zn/exec',
+    apiUrl: 'https://script.google.com/macros/s/AKfycbziybWh6rOcZ-KFHnq6X6hkMkxweu0GL_pPo9Of_6NBE-7SAGzVU5Tl1cNlno2IE28/exec',
 
     init: function() {
         if(localStorage.getItem('taf_token')) {
