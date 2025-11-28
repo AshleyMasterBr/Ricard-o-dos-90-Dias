@@ -6,7 +6,7 @@
     <title>Protocolo TAF | Ricardo Freire</title>
     
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#EF4444">
+    <meta name="theme-color" content="#0080FF">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <link rel="stylesheet" href="style.css">
@@ -20,7 +20,7 @@
     <section id="screen-login" class="screen active">
         <div class="login-container">
             <div class="logo-area">
-                <img src="logo.png" alt="Logo Mindbox" class="logo-img" onerror="this.style.display='none'">
+                <img src="logo.png" alt="Logo Mindbox" class="logo-img" onerror="this.style.display='none'; alert('Erro: logo.png não encontrado na raiz.');">
                 <h1>PROTOCOLO <span class="text-highlight">TAF</span></h1>
                 <p class="subtitle">DO ZERO À APROVAÇÃO</p>
             </div>
@@ -37,7 +37,13 @@
             <button class="btn-primary" onclick="app.login()">
                 <i class="fa-solid fa-right-to-bracket"></i> ENTRAR
             </button>
-            <p class="support-link">Problemas no acesso? <a href="#">Suporte</a></p>
+            
+            <p class="support-link">
+                Problemas no acesso? 
+                <a href="https://wa.me/5511913393797?text=Olá,%20preciso%20de%20suporte%20com%20o%20App%20TAF." target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> Falar com Suporte
+                </a>
+            </p>
         </div>
     </section>
 
