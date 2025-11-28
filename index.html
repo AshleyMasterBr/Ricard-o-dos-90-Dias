@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -94,7 +95,7 @@
                 <div class="mission-action"><i class="fa-solid fa-chevron-right"></i></div>
             </div>
 
-            <h4 class="section-title">CENTRAL DE COMANDO</h4>
+            <<h4 class="section-title">CENTRAL DE COMANDO</h4>
             <div class="tools-grid">
                 <div class="tool-card" onclick="app.openModal('modal-nutrition')">
                     <i class="fa-solid fa-utensils"></i><span>NUTRIÇÃO</span>
@@ -108,7 +109,14 @@
                 <div class="tool-card" onclick="app.resetDay()">
                     <i class="fa-solid fa-rotate-left"></i><span>RESET</span>
                 </div>
-            </div>
+
+                <div class="tool-card" onclick="app.exportData()">
+                    <i class="fa-solid fa-download"></i><span>SALVAR</span>
+                </div>
+                <div class="tool-card" onclick="app.importData()">
+                    <i class="fa-solid fa-upload"></i><span>LER SAVE</span>
+                </div>
+                </div>
 
             <div class="motivation-banner">
                 <p id="daily-quote">"Disciplina é liberdade."</p>

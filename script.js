@@ -258,6 +258,62 @@ const app = {
         }
     },
 
+// --- CONFETE TÁTICO ---
+    triggerConfetti: function() {
+        // Efeito de explosão militar (vermelho e preto)
+        var end = Date.now() + (2 * 1000);
+        var colors = ['#EF4444', '#ffffff', '#000000'];
+
+        (function frame() {
+            confetti({
+                particleCount: 3,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: colors
+            });
+            confetti({
+                particleCount: 3,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: colors
+            });
+
+            if (Date.now() < end) {
+                requestAnimationFrame(frame);
+            }
+        }());
+    },
+
+    // --- SISTEMA DE BACKUP (SALVAR PROGRESSO) ---
+    exportData: function() {
+        const data = {
+            nivel: localStorage.getItem('taf_level'),
+            dia: localStorage.getItem('taf_day'),
+            nome: localStorage.getItem('taf_user_name')
+        };
+        // Cria um código em Base64 (parece um token)
+        const codigo = btoa(JSON.stringify(data));
+        prompt("Copie este código e guarde em local seguro:", codigo);
+    },
+
+    importData: function() {
+        const codigo = prompt("Cole seu código de backup aqui:");
+        if (codigo) {
+            try {
+                const data = JSON.parse(atob(codigo));
+                localStorage.setItem('taf_level', data.nivel);
+                localStorage.setItem('taf_day', data.dia);
+                localStorage.setItem('taf_user_name', data.nome);
+                alert("DADOS RECUPERADOS COM SUCESSO!");
+                location.reload();
+            } catch (e) {
+                alert("Código inválido.");
+            }
+        }
+    },
+    
     logout: function() {
         if(confirm("Sair do sistema?")) {
             localStorage.clear(); 
