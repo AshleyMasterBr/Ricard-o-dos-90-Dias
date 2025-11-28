@@ -1,16 +1,16 @@
 /* =========================================
-   GUIA DE TÉCNICA (Extraído do PDF)
+   GUIA DE TÉCNICA (Limpo e Direto)
    ========================================= */
 const EXERCISE_GUIDE = {
-    "Flexão": "Mãos alinhadas com ombros. Corpo em linha reta. Desça até o peito aproximar do solo. (Pág 14)",
-    "Barra": "Queixo deve passar da barra. Não balance o corpo. Estenda totalmente os braços na descida. (Pág 13)",
-    "Abdominal": "Toque as mãos nos pés ou próximo. Movimento contínuo. Não pare embaixo. (Pág 15)",
-    "Corrida": "Postura ereta. Passada natural. Mantenha ritmo constante. (Pág 16)",
-    "Agachamento": "Pés na largura dos ombros. Mantenha a coluna reta. Desça até 90 graus."
+    "Flexão": "Mãos alinhadas com ombros. Corpo em linha reta. Desça até o peito aproximar do solo e suba completamente.",
+    "Barra": "Inicie com braços estendidos. Suba até o queixo passar da barra. Não balance o corpo (kipping).",
+    "Abdominal": "Deitado, suba o tronco e toque as mãos nos pés ou tornozelos. Mantenha o movimento contínuo.",
+    "Corrida": "Mantenha a postura ereta e olhar para frente. Passada natural. Controle a respiração pelo nariz e boca.",
+    "Agachamento": "Pés na largura dos ombros. Mantenha a coluna reta e o peito aberto. Desça até as coxas ficarem paralelas ao chão."
 };
 
 /* =========================================
-   FRASES DO RICARDO (Pág 10 e 31)
+   FRASES DO RICARDO
    ========================================= */
 const QUOTES = [
     "Disciplina é liberdade.",
@@ -30,7 +30,7 @@ const TREINOS = {
             foco: "Resistência Base",
             aquecimento: ["5 min Trote Leve", "10 Polichinelos"],
             principal: [
-                "Barra Fixa: 3x Máx (ou Negativa)",
+                "Barra Fixa: 3x Máx (ou Negativa - segure a descida)",
                 "Flexão de Braço: 4x Máx",
                 "Abdominal Remador: 3x15",
                 "Corrida: 800m + 4x100m"
@@ -50,7 +50,7 @@ const TREINOS = {
             aquecimento: ["6 min Trote", "10 Burpees"],
             principal: [
                 "Flexão: 4x Máx", 
-                "Barra: 3x6 (Pausa 3s)", 
+                "Barra: 3x6 (Pausa 3s no topo)", 
                 "Abdominal Carga: 3x20", 
                 "Tiros: 4x200m"
             ]
@@ -79,15 +79,12 @@ const TREINOS = {
 const app = {
     data: { nivel: null, dia: 1, nome: 'Guerreiro' },
 
-    // SEU LINK SECRETO DA API (JÁ CONFIGURADO)
+    // MANTENHA O SEU LINK AQUI:
     apiUrl: 'https://script.google.com/macros/s/AKfycbwxlJH7xcKbml9PP_2NVmfBUtAUqBstBQCQ0bBql-8DMlYZZW8cZ0uNx6EyPbdb98Zn/exec',
 
     init: function() {
-        // Verifica se tem token salvo
         if(localStorage.getItem('taf_token')) {
             this.loadData();
-            
-            // Se tem token mas não tem nível, joga pro teste
             if (this.data.nivel) {
                 this.showScreen('screen-dashboard');
             } else {
@@ -105,7 +102,7 @@ const app = {
         window.scrollTo(0, 0);
     },
 
-    // --- SISTEMA DE LOGIN REAL ---
+    // --- LOGIN REAL ---
     login: function() {
         const email = document.getElementById('login-email').value.trim();
         const pass = document.getElementById('login-pass').value.trim();
@@ -117,12 +114,9 @@ const app = {
             return;
         }
 
-        // Efeito Visual de "Pensando"
         btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> CONECTANDO...';
         btn.disabled = true;
 
-        // Disparo para o Google Sheets
-        // Usamos text/plain para evitar erro de CORS (Preflight)
         fetch(this.apiUrl, {
             method: 'POST',
             redirect: "follow", 
@@ -131,29 +125,26 @@ const app = {
         })
         .then(response => response.json())
         .then(data => {
-            if(data.result === 'success') {
-                // SUCESSO!
+            if(data.result === 'sucesso' || data.result === 'success') {
                 localStorage.setItem('taf_token', 'valid_secure');
-                localStorage.setItem('taf_user_name', data.nome); // Salva o nome que veio da planilha
+                localStorage.setItem('taf_user_name', data.nome); 
                 this.data.nome = data.nome;
                 
-                // Roteamento
                 if(!localStorage.getItem('taf_level')) {
                     this.showScreen('screen-onboarding');
                 } else {
-                    // Recarrega para aplicar o nome e dados
                     location.reload();
                 }
             } else {
-                // ERRO (Senha errada ou Bloqueado)
-                alert('🚫 ' + data.mensagem);
+                const erroMsg = data.msg || data.mensagem || "Erro desconhecido";
+                alert('🚫 ' + erroMsg);
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             }
         })
         .catch(error => {
             console.error('Erro:', error);
-            alert('⚠️ Erro de conexão. Verifique sua internet.');
+            alert('⚠️ Erro de conexão. Tente novamente.');
             btn.innerHTML = originalText;
             btn.disabled = false;
         });
@@ -167,14 +158,13 @@ const app = {
         if(!run || !pushups || !abs) { alert("Preencha todos os campos para gerar o plano!"); return; }
 
         let nivelCalculado = 'INICIANTE';
-        // Lógica Pág 8 do PDF
+        // Critérios de Nivelamento
         if (pushups > 30 && abs > 40 && run < 5.0) nivelCalculado = 'AVANCADO';
         else if (pushups >= 15 && abs >= 25 && run <= 7.0) nivelCalculado = 'INTERMEDIARIO';
 
         localStorage.setItem('taf_level', nivelCalculado);
         localStorage.setItem('taf_day', 1);
         
-        // Força recarregamento para garantir
         location.reload();
     },
 
@@ -184,11 +174,9 @@ const app = {
         this.data.nome = localStorage.getItem('taf_user_name') || 'Guerreiro';
         
         if(this.data.nivel) {
-            // Atualiza Nome e Nível no Topo
             document.getElementById('user-rank').innerText = this.data.nome.split(' ')[0].toUpperCase(); 
             document.getElementById('user-level-display').innerText = `NÍVEL: ${this.data.nivel}`;
             
-            // Barra
             const pct = (this.data.dia / 90) * 100;
             document.getElementById('progress-text').innerText = `Dia ${this.data.dia} de 90`;
             document.getElementById('global-progress').style.width = `${pct}%`;
@@ -215,9 +203,7 @@ const app = {
 
     getTreinoDoDia: function() {
         const dia = this.data.dia % 7;
-        // 1=Seg, 3=Qua, 5=Sex (Específico)
         if ([1,3,5].includes(dia)) return 'padrao';
-        // 2=Ter, 4=Qui, 6=Sab (Força)
         if ([2,4,6].includes(dia)) return 'fortalecimento';
         return 'descanso';
     },
@@ -231,13 +217,10 @@ const app = {
         
         document.getElementById('warmup-list').innerHTML = treino.aquecimento.map(i => `<li>${i}</li>`).join('');
         
-        // Lista Principal com Dropdown
         const mainContainer = document.getElementById('main-list-container');
         mainContainer.innerHTML = treino.principal.map(exercicio => {
             const nomeBase = exercicio.split(':')[0].trim();
             let desc = "Execute com foco na técnica.";
-            
-            // Busca a descrição técnica no guia
             for (const key in EXERCISE_GUIDE) {
                 if (nomeBase.includes(key)) desc = EXERCISE_GUIDE[key];
             }
@@ -277,7 +260,7 @@ const app = {
 
     logout: function() {
         if(confirm("Sair do sistema?")) {
-            localStorage.clear(); // Limpa token e dados
+            localStorage.clear(); 
             location.reload();
         }
     },
@@ -287,22 +270,14 @@ const app = {
         document.getElementById('daily-quote').innerText = `"${QUOTES[random]}"`;
     },
 
-    // CALCULADORA DE NOTA (Simulador)
     calculateScore: function() {
         const flex = parseInt(document.getElementById('calc-flex').value) || 0;
         const abs = parseInt(document.getElementById('calc-abs').value) || 0;
         const run = parseFloat(document.getElementById('calc-run').value) || 15;
 
-        // Lógica Simulada (Baseada na média das tabelas)
         let pontos = 0;
-        
-        // Flexão (Aprox 2.5 pts por repetição acima de 15)
         if(flex > 15) pontos += (flex - 15) * 2;
-        
-        // Abdominal (Aprox 2 pts por repetição acima de 25)
         if(abs > 25) pontos += (abs - 25) * 2;
-        
-        // Corrida (Pontos sobem quanto menor o tempo)
         if (run < 12) pontos += 80;
         else if (run < 13) pontos += 60;
         else if (run < 14) pontos += 40;
@@ -317,10 +292,10 @@ const app = {
 
         if (pontos >= 100) {
             statusText.innerText = "APROVADO";
-            statusText.style.color = "#10B981"; // Verde
+            statusText.style.color = "#10B981"; 
         } else {
             statusText.innerText = "REPROVADO - TREINE MAIS";
-            statusText.style.color = "#EF4444"; // Vermelho
+            statusText.style.color = "#EF4444"; 
         }
     }
 };
