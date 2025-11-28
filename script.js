@@ -1,309 +1,260 @@
 /* =========================================
-   BANCO DE DADOS TÁTICO (Baseado no PDF)
+   GUIA DE TÉCNICA (Extraído do PDF)
+   ========================================= */
+const EXERCISE_GUIDE = {
+    "Flexão": "Mãos alinhadas com ombros. Corpo em linha reta. Desça até o peito aproximar do solo. (Pág 14)",
+    "Barra": "Queixo deve passar da barra. Não balance o corpo. Estenda totalmente os braços na descida. (Pág 13)",
+    "Abdominal": "Toque as mãos nos pés ou próximo. Movimento contínuo. Não pare embaixo. (Pág 15)",
+    "Corrida": "Postura ereta. Passada natural. Mantenha ritmo constante. (Pág 16)",
+    "Agachamento": "Pés na largura dos ombros. Mantenha a coluna reta. Desça até 90 graus."
+};
+
+/* =========================================
+   FRASES DO RICARDO (Pág 10 e 31)
+   ========================================= */
+const QUOTES = [
+    "Disciplina é liberdade.",
+    "Seu corpo só vai onde sua mente permite.",
+    "Não precisa ser perfeito, só precisa ser melhor que ontem.",
+    "Motivação passa. Disciplina fica.",
+    "A dor é temporária. A glória é eterna."
+];
+
+/* =========================================
+   BANCO DE DADOS DE TREINOS
    ========================================= */
 const TREINOS = {
-    // NÍVEL 1: INICIANTE (Mês 1 - Pág 24)
     'INICIANTE': {
         padrao: {
             titulo: "ADAPTAÇÃO TÉCNICA",
             foco: "Resistência Base",
-            aquecimento: [
-                "5 min Caminhada/Trote Leve",
-                "10 Agachamentos + 10 Polichinelos",
-                "Mobilidade Articular (Ombros/Quadril)"
-            ],
+            aquecimento: ["5 min Trote Leve", "10 Polichinelos"],
             principal: [
-                "Barra Fixa (ou Negativa): 3x Máx (Segura 5s na descida)",
-                "Flexão de Braço: 4x Máx (Min 8-10 reps)",
-                "Abdominal Remador: 3 séries de 15 reps",
-                "Corrida: 800m Leve + 4 Tiros de 100m (30s descanso)"
+                "Barra Fixa: 3x Máx (ou Negativa)",
+                "Flexão de Braço: 4x Máx",
+                "Abdominal Remador: 3x15",
+                "Corrida: 800m + 4x100m"
             ]
         },
         fortalecimento: {
-            titulo: "FORTALECIMENTO BASE",
-            foco: "Prevenção de Lesões",
-            aquecimento: ["5 min Trote", "Mobilidade Geral"],
-            principal: [
-                "Agachamento Livre: 3x12",
-                "Afundo: 3x10 (cada perna)",
-                "Prancha Frontal: 3x30s",
-                "Stiff: 3x12"
-            ]
+            titulo: "FORÇA BASE",
+            foco: "Prevenção",
+            aquecimento: ["Mobilidade Geral"],
+            principal: ["Agachamento: 3x12", "Afundo: 3x10", "Prancha: 3x30s"]
         }
     },
-
-    // NÍVEL 2: INTERMEDIÁRIO (Mês 2 - Pág 25)
     'INTERMEDIARIO': {
         padrao: {
             titulo: "DESENVOLVIMENTO",
-            foco: "Aumento de Volume",
-            aquecimento: ["6 min Trote Progressivo", "10 Burpees Leves"],
+            foco: "Volume",
+            aquecimento: ["6 min Trote", "10 Burpees"],
             principal: [
-                "Flexão de Braço: 4x Máx (Min 12 reps)",
-                "Barra Fixa: 3x6 (Pausa 3s no meio)",
-                "Abdominal Remador (Carga Leve): 3x20",
-                "Corrida: 4 Tiros de 200m (1 min descanso)"
+                "Flexão: 4x Máx", 
+                "Barra: 3x6 (Pausa 3s)", 
+                "Abdominal Carga: 3x20", 
+                "Tiros: 4x200m"
             ]
         },
-        fortalecimento: {
-            titulo: "FORÇA FUNCIONAL",
-            foco: "Potência",
-            aquecimento: ["Mobilidade Ombros/Quadril", "3x10 Jumping Jacks"],
-            principal: [
-                "Agachamento com Carga: 4x10",
-                "Remada Unilateral: 3x12",
-                "Flexão Inclinada: 3x10",
-                "Prancha com Elevação: 3x30s"
-            ]
-        }
+        fortalecimento: { titulo: "FORÇA FUNCIONAL", foco: "Potência", aquecimento: ["Mobilidade"], principal: ["Agachamento Carga: 4x10", "Remada: 3x12"] }
     },
-
-    // NÍVEL 3: AVANÇADO (Mês 3 - Pág 26)
     'AVANCADO': {
         padrao: {
             titulo: "PERFORMANCE TAF",
-            foco: "Simulação Real",
-            aquecimento: ["8 min Corrida Progressiva", "15 Mountain Climbers"],
+            foco: "Simulação",
+            aquecimento: ["8 min Corrida", "15 Mountain Climbers"],
             principal: [
-                "Flexão Tempo Controlado: 4x12 (2s desce / 1s sobe)",
-                "Barra Fixa: 3x6 (Com carga ou isometria topo)",
-                "Abdominal V-UP: 3x15",
-                "Corrida: 5 Tiros de 400m (1 min descanso)"
+                "Flexão Controlada: 4x12", 
+                "Barra: 3x6", 
+                "Abdominal V-UP: 3x15", 
+                "Tiros: 5x400m"
             ]
         },
-        fortalecimento: {
-            titulo: "POTÊNCIA EXPLOSIVA",
-            foco: "Pico de Força",
-            aquecimento: ["Mobilidade Completa", "Ativação Específica"],
-            principal: [
-                "Agachamento com Salto: 4x8",
-                "Flexão Pliométrica (Explosiva): 3x6",
-                "Russian Twist: 3x20",
-                "Burpee Pull-up: 3x6"
-            ]
-        }
+        fortalecimento: { titulo: "EXPLOSÃO", foco: "Pico", aquecimento: ["Mobilidade"], principal: ["Salto Vertical: 4x8", "Flexão Pliométrica: 3x6"] }
     }
 };
 
 /* =========================================
-   SISTEMA OPERACIONAL DO APP
+   APP LOGIC
    ========================================= */
 const app = {
-    data: {
-        nivel: null,
-        dia: 1,
-        nome: 'Guerreiro'
-    },
+    data: { nivel: null, dia: 1, nome: 'Guerreiro' },
 
-    // Inicialização
     init: function() {
-        const token = localStorage.getItem('taf_token');
-        
-        if (token) {
+        if(localStorage.getItem('taf_token')) {
             this.loadData();
-            
-            // Se já tem nível, vai pro Dashboard. Se não, Onboarding.
-            if (this.data.nivel) {
-                this.showScreen('screen-dashboard');
-            } else {
-                this.showScreen('screen-onboarding');
-            }
+            if (this.data.nivel) this.showScreen('screen-dashboard');
+            else this.showScreen('screen-onboarding');
         } else {
             this.showScreen('screen-login');
         }
+        this.updateQuote();
     },
 
-    // Navegação de Telas
-    showScreen: function(screenId) {
+    showScreen: function(id) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        document.getElementById(screenId).classList.add('active');
-        window.scrollTo(0, 0);
+        document.getElementById(id).classList.add('active');
     },
 
-    // Lógica de Login (Simulada)
     login: function() {
-        const code = document.getElementById('access-code').value;
+        const email = document.getElementById('login-email').value;
+        const pass = document.getElementById('login-pass').value;
         
-        // Código Mestre "1010" (Ou qualquer regra que você queira)
-        if (code.length >= 4) { 
-            localStorage.setItem('taf_token', 'ativo');
+        // Login Simples de Validação
+        if(email.includes('@') && pass.length > 0) {
+            localStorage.setItem('taf_token', 'valid');
+            localStorage.setItem('taf_user', email.split('@')[0]);
             this.init();
         } else {
-            alert('⚠️ CÓDIGO INVÁLIDO. Verifique seu e-mail de acesso.');
+            alert('Preencha e-mail e senha.');
+        }
+    },
+
+    processOnboarding: function() {
+        const run = parseFloat(document.getElementById('test-run').value);
+        const pushups = parseInt(document.getElementById('test-pushups').value);
+        const abs = parseInt(document.getElementById('test-abs').value);
+
+        if(!run || !pushups || !abs) { alert("Preencha todos os campos!"); return; }
+
+        let nivel = 'INICIANTE';
+        if (pushups > 30 && abs > 40 && run < 5.0) nivel = 'AVANCADO';
+        else if (pushups >= 15 && abs >= 25 && run <= 7.0) nivel = 'INTERMEDIARIO';
+
+        localStorage.setItem('taf_level', nivel);
+        localStorage.setItem('taf_day', 1);
+        this.loadData();
+        this.showScreen('screen-dashboard');
+    },
+
+    loadData: function() {
+        this.data.nivel = localStorage.getItem('taf_level');
+        this.data.dia = parseInt(localStorage.getItem('taf_day')) || 1;
+        
+        if(this.data.nivel) {
+            document.getElementById('user-rank').innerText = this.data.nivel;
+            document.getElementById('user-level-display').innerText = `NÍVEL: ${this.data.nivel}`;
+            
+            const pct = (this.data.dia / 90) * 100;
+            document.getElementById('progress-text').innerText = `Dia ${this.data.dia} de 90`;
+            document.getElementById('global-progress').style.width = `${pct}%`;
+            
+            this.updateMissionCard();
+        }
+    },
+
+    updateMissionCard: function() {
+        const treino = this.getTreinoDoDia();
+        if (treino === 'descanso') {
+            document.getElementById('today-workout-title').innerText = "DESCANSO";
+            document.getElementById('today-workout-desc').innerText = "Recuperação Total";
+        } else {
+            const db = TREINOS[this.data.nivel] || TREINOS['INICIANTE'];
+            const t = db[treino];
+            document.getElementById('today-workout-title').innerText = t.titulo;
+            document.getElementById('today-workout-desc').innerText = t.foco;
+        }
+    },
+
+    getTreinoDoDia: function() {
+        const dia = this.data.dia % 7;
+        if ([1,3,5].includes(dia)) return 'padrao';
+        if ([2,4,6].includes(dia)) return 'fortalecimento';
+        return 'descanso';
+    },
+
+    openWorkout: function() {
+        const tipo = this.getTreinoDoDia();
+        if (tipo === 'descanso') { alert("Dia de Descanso! Foque na dieta."); return; }
+
+        const db = TREINOS[this.data.nivel] || TREINOS['INICIANTE'];
+        const treino = db[tipo];
+        
+        document.getElementById('warmup-list').innerHTML = treino.aquecimento.map(i => `<li>${i}</li>`).join('');
+        
+        // Gera lista com Dropdown de explicação
+        const mainContainer = document.getElementById('main-list-container');
+        mainContainer.innerHTML = treino.principal.map(exercicio => {
+            const nomeBase = exercicio.split(':')[0].trim();
+            // Procura explicação parcial no guia
+            let desc = "Execute com atenção.";
+            for (const key in EXERCISE_GUIDE) {
+                if (nomeBase.includes(key)) desc = EXERCISE_GUIDE[key];
+            }
+
+            return `
+            <details class="exercise-detail">
+                <summary>
+                    <span>${exercicio}</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </summary>
+                <p class="technique-desc">💡 <strong>TÉCNICA:</strong> ${desc}</p>
+            </details>`;
+        }).join('');
+
+        document.getElementById('modal-title').innerText = `DIA ${this.data.dia}`;
+        document.getElementById('modal-workout').classList.add('active');
+    },
+
+    openModal: (id) => document.getElementById(id).classList.add('active'),
+    closeModal: (id) => document.getElementById(id).classList.remove('active'),
+
+    completeMission: function() {
+        if(confirm("Missão cumprida?")) {
+            localStorage.setItem('taf_day', this.data.dia + 1);
+            this.closeModal('modal-workout');
+            this.loadData();
+            alert("PROGRESSO REGISTRADO!");
+        }
+    },
+
+    resetDay: function() {
+        if(confirm("Resetar para o Dia 1?")) {
+            localStorage.setItem('taf_day', 1);
+            this.loadData();
         }
     },
 
     logout: function() {
-        if(confirm("Tem certeza que deseja sair?")) {
+        if(confirm("Sair?")) {
             localStorage.clear();
             location.reload();
         }
     },
 
-    // LÓGICA DE CLASSIFICAÇÃO (O Cérebro da Pág 8)
-    processOnboarding: function() {
-        const run = parseFloat(document.getElementById('test-run').value) || 10;
-        const pushups = parseInt(document.getElementById('test-pushups').value) || 0;
-        const abs = parseInt(document.getElementById('test-abs').value) || 0;
-
-        let nivelCalculado = 'INICIANTE';
-
-        // Critérios do PDF (Pág 8):
-        // Avançado: >30 flex, >40 abs, <5 min corrida
-        // Intermediário: 15-30 flex, 25-40 abs, 5-7 min corrida
-        if (pushups > 30 && abs > 40 && run < 5.0) {
-            nivelCalculado = 'AVANCADO';
-        } else if (pushups >= 15 && abs >= 25 && run <= 7.0) {
-            nivelCalculado = 'INTERMEDIARIO';
-        }
-
-        // Salva e Redireciona
-        localStorage.setItem('taf_level', nivelCalculado);
-        localStorage.setItem('taf_day', 1);
-        
-        this.loadData();
-        this.showScreen('screen-dashboard');
+    updateQuote: function() {
+        const random = Math.floor(Math.random() * QUOTES.length);
+        document.getElementById('daily-quote').innerText = `"${QUOTES[random]}"`;
     },
 
-    // Carrega dados do LocalStorage
-    loadData: function() {
-        this.data.nivel = localStorage.getItem('taf_level');
-        this.data.dia = parseInt(localStorage.getItem('taf_day')) || 1;
+    // CALCULADORA SIMPLES (Lógica Pág 6)
+    calculateScore: function() {
+        const flex = parseInt(document.getElementById('calc-flex').value) || 0;
+        const abs = parseInt(document.getElementById('calc-abs').value) || 0;
+        const run = parseFloat(document.getElementById('calc-run').value) || 15;
 
-        // Atualiza a Interface
-        if (this.data.nivel) {
-            document.getElementById('user-rank').innerText = this.data.nivel;
-            document.getElementById('user-level-display').innerText = `NÍVEL: ${this.data.nivel}`;
-            
-            // Barra de Progresso
-            const porcentagem = (this.data.dia / 90) * 100;
-            document.getElementById('progress-text').innerText = `DIA ${this.data.dia} DE 90`;
-            document.getElementById('global-progress').style.width = `${porcentagem}%`;
+        // Lógica simplificada para demonstração
+        // Pontuação base arbitrária para MVP
+        let pontos = 0;
+        pontos += flex * 2; // Ex: 20 flex = 40 pts
+        pontos += abs * 2;  // Ex: 30 abs = 60 pts
+        if (run < 13) pontos += 50;
+        else if (run < 15) pontos += 30;
 
-            this.updateMissionCard();
-        }
-    },
+        const resultBox = document.getElementById('calc-result');
+        const scoreText = document.getElementById('score-text');
+        const statusText = document.getElementById('score-status');
 
-    // Define qual treino mostrar hoje
-    updateMissionCard: function() {
-        const tipoTreino = this.getTreinoDoDia(this.data.dia);
-        const db = TREINOS[this.data.nivel];
-        
-        if (db && db[tipoTreino]) {
-            document.getElementById('today-workout-title').innerText = db[tipoTreino].titulo;
-            document.getElementById('today-workout-desc').innerText = "Foco: " + db[tipoTreino].foco;
+        resultBox.style.display = 'block';
+        scoreText.innerText = pontos + " PONTOS";
+
+        if (pontos > 150) {
+            statusText.innerText = "APROVADO (SIMULAÇÃO)";
+            statusText.style.color = "#10B981";
         } else {
-            // Dias de Descanso (Domingo)
-            document.getElementById('today-workout-title').innerText = "DESCANSO TOTAL";
-            document.getElementById('today-workout-desc').innerText = "Recuperação Muscular e Mental";
-        }
-    },
-
-    // Lógica de Calendário (Pág 12)
-    // Seg/Qua/Sex = Específico (padrao)
-    // Ter/Qui/Sab = Fortalecimento
-    // Dom = Descanso
-    getTreinoDoDia: function(diaNumero) {
-        const ciclo = diaNumero % 7; 
-        if (ciclo === 1 || ciclo === 3 || ciclo === 5) return 'padrao';
-        if (ciclo === 2 || ciclo === 4 || ciclo === 6) return 'fortalecimento';
-        return 'descanso';
-    },
-
-    // Abre o Modal com os detalhes
-    openWorkout: function() {
-        const tipo = this.getTreinoDoDia(this.data.dia);
-        if (tipo === 'descanso') {
-            alert("Hoje é dia de Descanso, Guerreiro. Foque na dieta e sono.");
-            return;
-        }
-
-        const treino = TREINOS[this.data.nivel][tipo];
-        
-        // Renderiza Aquecimento
-        const listaWarm = document.getElementById('warmup-list');
-        listaWarm.innerHTML = treino.aquecimento.map(item => `<li>${item}</li>`).join('');
-
-        // Renderiza Principal
-        const listaMain = document.getElementById('main-list');
-        listaMain.innerHTML = treino.principal.map(item => 
-            `<li>
-                <span class="ex-name">${item.split(':')[0]}</span>
-                <span class="rep-count">${item.split(':')[1] || 'Executar'}</span>
-            </li>`
-        ).join('');
-
-        document.getElementById('modal-title').innerText = `DIA ${this.data.dia} - ${treino.titulo}`;
-        document.getElementById('modal-workout').classList.add('active');
-    },
-
-    // Ferramentas de Modal
-    openModal: function(modalId) {
-        document.getElementById(modalId).classList.add('active');
-    },
-
-    closeModal: function(modalId) {
-        document.getElementById(modalId).classList.remove('active');
-    },
-
-    // Completar Missão (Avança o dia)
-    completeMission: function() {
-        if(confirm("Confirmar conclusão da missão de hoje?")) {
-            // Efeito visual / Som poderia entrar aqui
-            const novoDia = this.data.dia + 1;
-            localStorage.setItem('taf_day', novoDia);
-            
-            this.closeModal('modal-workout');
-            this.loadData(); // Recarrega a tela com o dia seguinte
-            
-            alert(`PARABÉNS! DIA ${this.data.dia} CONCLUÍDO.\nPrepare-se para amanhã.`);
-        }
-    },
-
-    resetDay: function() {
-        if(confirm("ATENÇÃO: Isso vai reiniciar todo o seu progresso para o Dia 1. Confirmar?")) {
-            localStorage.setItem('taf_day', 1);
-            this.loadData();
+            statusText.innerText = "RISCO DE REPROVAÇÃO";
+            statusText.style.color = "#EF4444";
         }
     }
 };
 
-/* =========================================
-   TIMER TÁTICO (Cronômetro)
-   ========================================= */
-const timer = {
-    interval: null,
-    seconds: 0,
-    isRunning: false,
-    
-    start: function() {
-        if (this.isRunning) return;
-        this.isRunning = true;
-        this.interval = setInterval(() => {
-            this.seconds++;
-            this.updateDisplay();
-        }, 1000);
-    },
-    
-    pause: function() {
-        this.isRunning = false;
-        clearInterval(this.interval);
-    },
-    
-    reset: function() {
-        this.pause();
-        this.seconds = 0;
-        this.updateDisplay();
-    },
-    
-    updateDisplay: function() {
-        const m = Math.floor(this.seconds / 60).toString().padStart(2, '0');
-        const s = (this.seconds % 60).toString().padStart(2, '0');
-        document.getElementById('timer-display').innerText = `${m}:${s}`;
-    }
-};
-
-// Inicia o App
-document.addEventListener('DOMContentLoaded', () => {
-    app.init();
-});
+window.onload = () => app.init();
